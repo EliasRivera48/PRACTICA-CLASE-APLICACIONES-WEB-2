@@ -1,0 +1,101 @@
+
+//CONTROL DE ACTIVOS TECNOLOGICOS//
+//ACTIVO//
+
+
+const activos:Activo[]=[
+{ID:1, activo_tec:"computadoras"},
+{ID:2, activo_tec:"sistemas operativos"},
+{ID:3, activo_tec:"" },
+{ID:4, activo_tec:"" },
+{ID:5, activo_tec:"" },
+];
+interface Activo {
+    ID: number;
+    activo_tec: string;
+  }
+  for (const Activo of activos) {
+    console.log(`ID: ${Activo.ID} - activo_tec: ${Activo.activo_tec}`);
+  }
+  //CALLBACK//
+  function findActivoByID(activos: Activo[], ID: number, callback: (activo: Activo | null) => void) {
+    const activo = activos.find(activo => activo.ID === ID);
+    callback(activo);
+  }
+  
+  findActivoByID(activos, 3, (activo) => {
+    if (activo) {
+      console.log(`Activo encontrado: ${activo.activo_tec}`);
+    } else {
+      console.log("Activo no encontrado");
+    }
+  });
+
+//DEPARTAMENTO//
+
+
+const departamentos:Departamento[]=[
+    {ID:1, depart:"", persona_encargada:""},
+    {ID:2, depart:"", persona_encargada:""},
+    {ID:3, depart:"", persona_encargada:""},
+    {ID:4, depart:"", persona_encargada:""},
+    {ID:5, depart:"", persona_encargada:""},
+    ];
+    interface Departamento {
+        ID: number;
+        depart: string;
+        persona_encargada:string;
+      }
+      for (const Departamento of departamentos) {
+        console.log(`ID: ${Departamento.ID} - Departamento: ${Departamento.depart}-Persona Encargada:${Departamento.persona_encargada}`);
+      }
+    
+    //CONTROL DE ACTIVO//
+
+
+    const control_activo:Activito[]=[
+        {ID:1,ID_activo:1,ID_departamento:1,Fecha_asig:"10/1/2024",Persona_asig:"Andres",Tiempo_depre:4},
+        {ID:2,ID_activo:2,ID_departamento:2,Fecha_asig:"",Persona_asig:"",Tiempo_depre:},
+        {ID:3,ID_activo:3,ID_departamento:3,Fecha_asig:"",Persona_asig:"",Tiempo_depre:},
+        {ID:4,ID_activo:4,ID_departamento:4,Fecha_asig:"",Persona_asig:"",Tiempo_depre:},
+        {ID:5,ID_activo:5,ID_departamento:5,Fecha_asig:"",Persona_asig:"",Tiempo_depre:},
+        ];
+       
+        interface Activito {
+            ID: number;
+            ID_activo: number;
+            ID_departamento:number;
+            Fecha_asig:string;
+            Persona_asig:string;
+            Tiempo_depre:number;
+          }
+          for (const Activito of control_activo) {
+            console.log(`ID: ${Activito.ID} - ID ACTIVO: ${Activito.ID_activo}-ID DEPARTAMENTO:${Activito.ID_departamento}
+            -FECHA ASIGNADA:${Activito.Fecha_asig}-PERSONA ASIGNADA:${Activito.Persona_asig}-TIEMPO DEPRECIADO:${Activito.Tiempo_depre}`);
+          }
+        //APPI//
+        async function getWeatherByCity(city: string) {
+            const apiKey = "YOUR_API_KEY"; // Reemplaza con tu clave API de OpenWeatherMap
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+          
+            const response = await fetch(url);
+            const data = await response.json();
+          
+            if (data.cod === "404") {
+              console.error(`Ciudad no encontrada: ${city}`);
+              return;
+            }
+          
+            const weather = data.weather[0];
+            const description = weather.description;
+            const temperature = data.main.temp;
+            const feelsLike = data.main.feels_like;
+          
+            console.log(`Clima en ${city}:`);
+            console.log(`Descripción: ${description}`);
+            console.log(`Temperatura: ${temperature} °C`);
+            console.log(`Sensación térmica: ${feelsLike} °C`);
+          }
+          
+          getWeatherByCity("Guayaquil");
+          
